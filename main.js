@@ -66,18 +66,62 @@ const mochila = [];
 let botonCompra = document.querySelector("#botonCompra");
 
 let lista2 = document.querySelector('#lista2');
-//Al hacer click en el boton de compra, tiene en cuenta que este depositado el mismo ID de donde hizo click al objeto-boton, para que pueda compraqr el mismo objeto.
-
+    //Una vez que hacemos click en el boton de comprar, ahora nos abrira una ventana nueva en donde nos pedira confirmacion de compra.
 botonCompra.addEventListener('click', () => {
-        let objeto = vendedorStorage.find(item => item.id == clickInfo);
-        //La confirmacion de compra.
-        let confirmarCompra = confirm(`Quieres comprar ${objeto.nombre}?`);
-        //Aqui agrega el mismo elemento al que hizo la compra a la mochila.
-        if (confirmarCompra) {
+    //Al hacer click en el boton de compra, tiene en cuenta que este depositado el mismo ID de donde hizo click al objeto-boton, para que pueda compraqr el mismo objeto.
+    let objeto = vendedorStorage.find(item => item.id == clickInfo);
 
-            // Ahora, dependiendo del ID del objeto, mostramos un mensaje diferente
+    //Tomamos la referencia al elemento padre
+    let ventanaPanel = document.getElementById('BG-img');
+
+    //Creamos todos los elementos, tanto el texto como los dos botones.
+    let panelConfirmacion = document.createElement('div');
+    panelConfirmacion.id = 'panelConfirmacion';
+    //Utilice boton de bootsrap y tambien añadi una animacion para la ventana de confirmacion.
+    let textoDeCompra = document.createElement('p');
+    textoDeCompra.id = 'textoDeCompra';
+    textoDeCompra.textContent = `¿Quieres comprar ${objeto.nombre}?`;
+    panelConfirmacion.appendChild(textoDeCompra);
+    panelConfirmacion.className="animate__animated animate__bounceInLeft"
+
+    let botonesConfirmaciones = document.createElement('div');
+    botonesConfirmaciones.id = 'botonesConfirmaciones';
+
+    //Boton de rechazar
+    let botonRechazar = document.createElement('button');
+    botonRechazar.id = 'botonRechazar';
+    botonRechazar.className = 'botonPanel btn btn-danger';
+    botonRechazar.innerHTML = '<i class="bi bi-x-lg"></i>No';
+    botonesConfirmaciones.appendChild(botonRechazar);
+
+    //Boton de comprar
+    let botonConfirmar = document.createElement('button');
+    botonConfirmar.id = 'botonConfirmar';
+    botonConfirmar.className = 'botonPanel btn btn-success';
+    botonConfirmar.innerHTML = '<i class="bi bi-check-lg"></i> Si';
+    botonesConfirmaciones.appendChild(botonConfirmar);
+
+    panelConfirmacion.appendChild(botonesConfirmaciones);
+    ventanaPanel.appendChild(panelConfirmacion);
+    //Entonces ahora, una vez creada la nueva ventana, le agregamos un nuevo evento pero al boton de confirmar compra para que ejecute el resto del codigo.
+    botonConfirmar.addEventListener('click', () => {
+
+        mochila.push(objeto);
+        vendedorStorage = vendedorStorage.filter(item => item.id != clickInfo);
+        swal(`${objeto.nombre} se ha añadido a tu mochila`);
+        let boton = document.getElementById(clickInfo);
+        boton.parentNode.removeChild(boton);
+        localStorage.setItem("tiendaVendedor", JSON.stringify(vendedorStorage));
+
+
+        let objetoLista2 = document.createElement("button");
+        objetoLista2.id = `${objeto.id}`
+        objetoLista2.classList.add("claseDelBoton");
+        objetoLista2.innerHTML= `
+        <img src="${objeto.imagen}" class="objetos ajustarImagen" alt="${objeto.nombre}">
+        `;
+        lista2.append(objetoLista2);
         let globoTexto = document.getElementById('globoTexto');
-        //Este switch lo hice para que el mercader nos cuente algo sobre el objeto que hemos comprado.
         switch(objeto.id) {
             case 1:
                 globoTexto.innerText = "En mis largos viajes por estas tierras me encontrado con curiosas criaturas, una de ellas fueron los elfos, que no usaban espadas ni armaduras de metal... Usaban madera! La magia de sus arboles era suficiente para ellos, he traido unos cuantos troncos y tablas, espero que les obtengas provecho.";
@@ -97,30 +141,14 @@ botonCompra.addEventListener('click', () => {
             default:
                 globoTexto.innerText = "no hay nada.";
         }
-
-
-            mochila.push(objeto);
-            //Elimina del array al elemento que se compro luego de que fue enviado a la mochila.
-            vendedorStorage = vendedorStorage.filter(item => item.id != clickInfo);
-            swal(`${objeto.nombre} se ha añadido a tu mochila`);
-            //Esto hace que tambien se elimine el boton que esta depositado en el dom.
-            let boton = document.getElementById(clickInfo);
-                boton.parentNode.removeChild(boton);
-                //Aqui, borra el item del storage que compramos.
-                localStorage.setItem("tiendaVendedor", JSON.stringify(vendedorStorage));
-                    // A partir de aca, empieza a rellenar la mochila en el DOM, dependiendo de que compramos.
-            let objetoLista2 = document.createElement("button");
-            objetoLista2.id = `${objeto.id}`
-            objetoLista2.classList.add("claseDelBoton");
-            objetoLista2.innerHTML= `
-            <img src="${objeto.imagen}" class="objetos ajustarImagen" alt="${objeto.nombre}">
-            `;
-        lista2.append(objetoLista2);
-        // tambien agrega el elemento comprado a un nuevo storage llamado mochila.
+        // Añade el objeto comprado al localStorage
         localStorage.setItem("mochila", JSON.stringify(mochila));
-        }
-
-
+        
+        // Oculta la ventana cuando se da la compra terminada
+        panelConfirmacion.style.display = 'none';
+        //Agregue esto para que no se acumulen los div en el html
+        panelConfirmacion.remove();
+        
         //Limpia la pantalla cuando ya no hayan elementos.
         if (lista1.children.length === 0) {
             ventanaInfo.innerHTML = ``;
@@ -131,7 +159,11 @@ botonCompra.addEventListener('click', () => {
                 swal("Observas que ya no tiene mas que ofrecerte el anciano, pues es hora de seguir con tu aventura, debes dirigirte al pueblo.");
                 globoTexto.innerText = "¡Vaya! Me quede sin mercancia, bueno, aqui se separan nuestros caminos, te deseo mucha suerte en tu camino viajero, enviale un saludo de mi parte al herrero!";
             }, 10000);
-            
-
         }
     });
+    // Evento de clic para el botón de cancelar
+    botonRechazar.addEventListener('click', () => {
+        // oculta la ventana cuando se ejecuta el rechazar
+        panelConfirmacion.style.display = 'none';
+    });
+});

@@ -9,7 +9,7 @@ main{
     align-items: center;
     justify-content: center;
 }
-.BG-img {
+#BG-img {
     width: 800px;
     height: 900px;
     background-image: url(./img/MercaderFinal.jpg);
@@ -50,6 +50,36 @@ main{
     border: 1px solid green;
     flex-direction: row;
     flex-wrap: wrap;
+}
+#panelConfirmacion{
+    border: solid blue 2px;
+    width: 300px;
+    height: 100px;
+    position: relative;
+    position: absolute;
+    top: 500px;
+    right: 250px;
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    padding: 5px;
+}
+#botonesConfirmaciones{
+    display: flex;
+    flex-direction: column;
+    margin: 3px;
+}
+#textoDeCompra{
+    font-size: 13px;
+    padding: 10px;
+}
+.botonPanel{
+    width: 40px;
+    height: 35px;
+    font-size: 13px;
+    margin-top: 10px;
 }
 
 #mochila {
@@ -127,4 +157,7 @@ button{
 .tituloItem{
     background-color: wheat;
     margin-left: 0;
+}
+.animate__animated.animate__bounceInLeft{
+    --animate-duration: 0.5s;
 }
