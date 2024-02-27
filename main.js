@@ -1,3 +1,4 @@
+
 //Objeto constructor
 class Objetos {
     constructor (id,nombre, valor,descripcion,imagen){
@@ -68,7 +69,7 @@ let botonCompra = document.querySelector("#botonCompra");
 let lista2 = document.querySelector('#lista2');
     //Una vez que hacemos click en el boton de comprar, ahora nos abrira una ventana nueva en donde nos pedira confirmacion de compra.
 botonCompra.addEventListener('click', () => {
-    //Al hacer click en el boton de compra, tiene en cuenta que este depositado el mismo ID de donde hizo click al objeto-boton, para que pueda compraqr el mismo objeto.
+    //Al hacer click en el boton de compra, tiene en cuenta que este depositado el mismo ID de donde hizo click al objeto-boton, para que pueda comprar el mismo objeto.
     let objeto = vendedorStorage.find(item => item.id == clickInfo);
 
     //Tomamos la referencia al elemento padre
@@ -104,6 +105,7 @@ botonCompra.addEventListener('click', () => {
     panelConfirmacion.appendChild(botonesConfirmaciones);
     ventanaPanel.appendChild(panelConfirmacion);
     //Entonces ahora, una vez creada la nueva ventana, le agregamos un nuevo evento pero al boton de confirmar compra para que ejecute el resto del codigo.
+    
     botonConfirmar.addEventListener('click', () => {
 
         mochila.push(objeto);
@@ -121,6 +123,7 @@ botonCompra.addEventListener('click', () => {
         <img src="${objeto.imagen}" class="objetos ajustarImagen" alt="${objeto.nombre}">
         `;
         lista2.append(objetoLista2);
+    //Aca ejecutara este switch para mostrar el globo de texto cuando se compre un objeto
         let globoTexto = document.getElementById('globoTexto');
         switch(objeto.id) {
             case 1:
@@ -140,7 +143,8 @@ botonCompra.addEventListener('click', () => {
                 break;
             default:
                 globoTexto.innerText = "no hay nada.";
-        }
+        }  
+
         // Añade el objeto comprado al localStorage
         localStorage.setItem("mochila", JSON.stringify(mochila));
         
