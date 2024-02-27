@@ -1,0 +1,37 @@
+{
+    "Madera": {
+        "id": 1,
+        "nombre": "Madera",
+        "valor": 10,
+        "descripcion": "Es fuerte, es firme y tiene un aroma suave, supongo que será madera elfica, los humanos no son tan detallistas...",
+        "imagenUrl": "https://cdn-icons-png.flaticon.com/512/3275/3275748.png"
+    },
+    "Acero": {
+        "id": 2,
+        "nombre": "Acero",
+        "valor": 20,
+        "descripcion": "Acero reluciente en donde puedes ver incluso tu reflejo, obra de un habil fundidor",
+        "imagenUrl": "https://th.bing.com/th/id/OIP.RpJgoDZPxRivIaaWgrlS9wAAAA?rs=1&pid=ImgDetMain"
+    },
+    "Cuero": {
+        "id": 3,
+        "nombre": "Cuero",
+        "valor": 5,
+        "descripcion": "Cuero de un animal que rara vez se encuentra por los bosques, material muy resistente.",
+        "imagenUrl": "https://th.bing.com/th/id/OIP.nTeDpEx0m_u9-mtD32BEXQHaHa?rs=1&pid=ImgDetMain"
+    },
+    "Gema": {
+        "id": 4,
+        "nombre": "Gema",
+        "valor": 10,
+        "descripcion": "Una gema roja que cuando la observas fijamente por unos segundos puedes ver que en el centro hay una pequeña flama bailando.",
+        "imagenUrl": "https://th.bing.com/th/id/OIP.aI5jR1yQBvW6xPXIohye-QAAAA?rs=1&pid=ImgDetMain"
+    },
+    "Pomo": {
+        "id": 5,
+        "nombre": "Pomo",
+        "valor": 7,
+        "descripcion": "Un pomo. No querrás que se te caiga el arma de las manos al primer golpe, ¿verdad?.",
+        "imagenUrl": "https://static.vecteezy.com/system/resources/previews/000/356/917/original/plumb-bob-vector-icon.jpg"
+    }
+}
