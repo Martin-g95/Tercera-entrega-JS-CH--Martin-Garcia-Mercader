@@ -1,7 +1,7 @@
 
 const obtencionDatosAPI = async () => {
     try {
-        const rutaDatos = './data/objetos.json'; // Reemplaza con la ruta correcta
+        const rutaDatos = './data/objetos.json'; 
         const respuesta = await fetch(rutaDatos);
 
     if (!respuesta.ok) {
@@ -10,14 +10,14 @@ const obtencionDatosAPI = async () => {
         const datosAPI = await respuesta.json();
         //Colocamos esos datos de la API local en localStorage
         localStorage.setItem('storageAPI', JSON.stringify(datosAPI));
-
+        
         return datosAPI;
     } catch (error) {
         console.error('Error al obtener datos:', error.message);
         return null;
     }
 };
-  // Ejemplo de uso:
+
 obtencionDatosAPI()
 .then((datos) => {
     if (datos) {

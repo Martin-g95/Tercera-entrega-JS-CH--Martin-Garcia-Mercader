@@ -1,5 +1,4 @@
 
-
 //Objeto constructor
 class Objetos {
     constructor (id,nombre, valor,descripcion,imagen){
