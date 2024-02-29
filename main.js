@@ -1,4 +1,5 @@
 
+
 //Objeto constructor
 class Objetos {
     constructor (id,nombre, valor,descripcion,imagen){
@@ -9,22 +10,59 @@ class Objetos {
         this.imagen = imagen;
     }
 }
+
+//Los datos del localStorage que necesito para la creacion de los objetos.
+
+let objetosStorage = localStorage.getItem("storageAPI");
+
+    objetosStorage = JSON.parse(objetosStorage);
+
+//Una vez tengo los datos del storage, estos objetos obtienen las propiedades de los objetos del storage que ya fueron traidos por la API.
+    const Madera = new Objetos(
+        objetosStorage.Madera.id,
+        objetosStorage.Madera.nombre,
+        objetosStorage.Madera.valor,
+        objetosStorage.Madera.descripcion,
+        objetosStorage.Madera.imagenUrl
+    );
+    const Acero = new Objetos(
+        objetosStorage.Acero.id,
+        objetosStorage.Acero.nombre,
+        objetosStorage.Acero.valor,
+        objetosStorage.Acero.descripcion,
+        objetosStorage.Acero.imagenUrl
+    );
+    const Cuero = new Objetos(
+        objetosStorage.Cuero.id,
+        objetosStorage.Cuero.nombre,
+        objetosStorage.Cuero.valor,
+        objetosStorage.Cuero.descripcion,
+        objetosStorage.Cuero.imagenUrl
+    );
+    const Gema = new Objetos(
+        objetosStorage.Gema.id,
+        objetosStorage.Gema.nombre,
+        objetosStorage.Gema.valor,
+        objetosStorage.Gema.descripcion,
+        objetosStorage.Gema.imagenUrl
+    );
+    const Pomo = new Objetos(
+        objetosStorage.Pomo.id,
+        objetosStorage.Pomo.nombre,
+        objetosStorage.Pomo.valor,
+        objetosStorage.Pomo.descripcion,
+        objetosStorage.Pomo.imagenUrl
+    );
+
 //Los objetos con sus respectivas propiedades.
-const Madera = new Objetos(1,"Madera", 10, "Es fuerte, es firme y tiene un aroma suave, supongo que sera madera elfica, los humanos no son tan detallistas...", "https://cdn-icons-png.flaticon.com/512/3275/3275748.png");
 
-const Acero = new Objetos(2,"Acero", 20, "Acero reluciente en donde puedes ver incluso tu reflejo, obra de un habil fundidor", "https://th.bing.com/th/id/OIP.RpJgoDZPxRivIaaWgrlS9wAAAA?rs=1&pid=ImgDetMain");
+// Ahora, creamos una nueva variable depositando esos objetos en un array.
 
-const Cuero = new Objetos(3,"Cuero", 5, "Cuero de un animal que rara vez se encuentra por los bosques, material muy resistente.", "https://th.bing.com/th/id/OIP.nTeDpEx0m_u9-mtD32BEXQHaHa?rs=1&pid=ImgDetMain");
+let vendedorStorage = [Madera, Cuero, Acero, Gema, Pomo]
 
-const Gema = new Objetos(4,"Gema", 10,"Una gema roja que cuando la observas fijamente por unos segundos puedes ver que en el centro hay una pequeña flama bailando.", "https://th.bing.com/th/id/OIP.aI5jR1yQBvW6xPXIohye-QAAAA?rs=1&pid=ImgDetMain");
+// Obtener los datos del localStorage
+JSON.parse(localStorage.getItem("storageAPI")) || localStorage.setItem("storageAPI", JSON.stringify(vendedorStorage));
 
-const Pomo = new Objetos(5,"Pomo", 7,"Un pomo. No querras que se te caiga el arma de las manos al primer golpe, ¿verdad?.", "https://static.vecteezy.com/system/resources/previews/000/356/917/original/plumb-bob-vector-icon.jpg");
-
-
-let vendedorStorage = [Madera, Acero, Cuero, Gema, Pomo];
-//Colocamos los objetos en el storage
-JSON.parse(localStorage.getItem("tiendaVendedor")) || localStorage.setItem("tiendaVendedor", JSON.stringify(vendedorStorage));
-let tiendaVendedor = localStorage.getItem("vendedorStorage");
 
 const tiendaObjetos = document.getElementById("lista1");
 //Hacemos un for each para renderizar las imagenes de los objetos en el inicio.
