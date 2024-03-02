@@ -161,3 +161,41 @@ button{
 .animate__animated.animate__bounceInLeft{
     --animate-duration: 0.5s;
 }
+
+#btnMusica {
+    background-image: url(./img/nota-musical.png);
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#btnMusica.encendido {
+    background-color: #2ecc71; /* Color cuando está encendido */
+    color: #fff;
+}
+
+#btnMusica.apagado {
+    background-color: #e74c3c; /* Color cuando está apagado */
+    color: #fff;
+}
+
+#btnReiniciar{
+    margin: 30px;
+    position: absolute;
+    bottom: 405px;
+    left: 640px;
+    background-image: url(./img/naranja.png);
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border: none;
+    cursor: pointer;
+}
